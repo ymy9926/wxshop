@@ -17,13 +17,13 @@
       </div>
       <div v-if='seller.supports' class='support-count' @click='showDetail'>
         <span class='count'>{{seller.supports.length}}个</span>
-        <i class='iconkeyboard_arrow_right'></i>
+        <i class='iconfont icon-right'></i>
       </div>
     </div>
     <div class='bulletin-wrapper' @click='showDetail'>
       <span class='bulletin-title'></span>
       <span class='bulletin-text'>{{seller.bulletin}}</span>
-      <i class='iconkeyboard_arrow_right'></i>
+      <i class='iconfont icon-right'></i>
     </div>
     <div class='backgroud'>
       <img :src='seller.avatar' width='100%' height='100%'>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class='detail-close' @click="hiddenDetail">
-        <i class='iconclose'></i>
+        <i class='iconfont icon-baseline-close-px'></i>
       </div>
     </div>
     </transition>
@@ -201,7 +201,7 @@ export default {
         font-size: 10px;
       }
 
-      .iconkeyboard_arrow_right {
+      .icon-right {
         margin-left: 2px;
         line-height: 24px;
         font-size: 10px;
@@ -236,7 +236,7 @@ export default {
       font-size: 10px;
     }
 
-    .iconkeyboard_arrow_right {
+    .icon-right {
       position: absolute;
       font-size: 10px;
       right: 12px;
@@ -380,6 +380,9 @@ export default {
       margin: -64px auto 0 auto;
       clear: both;
       font-size: 32px;
+    }
+    .icon-baseline-close-px{
+      font-size:32px;
     }
   }
 }

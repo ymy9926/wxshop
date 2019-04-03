@@ -4,7 +4,7 @@
       <div class="content-left">
         <div class="logo-warpper">
           <div class="logo" :class="{'highlight':totalFoods>0}">
-            <span class="iconshopping_cart" :class="{'highlight':totalFoods>0}"></span>
+            <span class="iconfont icon-cart" :class="{'highlight':totalFoods>0}"></span>
             <div class="num" v-show="totalFoods>0">{{totalFoods}}</div>
           </div>
         </div>
@@ -12,7 +12,7 @@
         <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
       </div>
       <div class="content-rigth">
-        <div class="pay">￥{{minPrice}}元起送</div>
+        <div class="pay" :class="payClass">{{payDesc}}</div>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
     selectFoods: {
       type: Array,
       default() {
-        return [{ price: 50, count: 10 }];
+        return [{ price: 10, count: 10 }];
       }
     },
     deliveryPrice: {
@@ -53,6 +53,23 @@ export default {
         total += food.count;
       });
       return total;
+    },
+    payDesc() {
+      if (this.totalPrice === 0) {
+        return `￥${this.minPrice}元起送`;
+      } else if (this.totalPrice < this.minPrice) {
+        let diff = this.minPrice - this.totalPrice;
+        return `还差￥${diff}元起送`;
+      } else {
+        return "去结算";
+      }
+    },
+    payClass() {
+      if (this.totalPrice < this.minPrice) {
+        return "not-enough";
+      } else {
+        return "enough";
+      }
     }
   },
   components: {}
@@ -97,13 +114,13 @@ export default {
           background: #2b343c;
 
           &.highlight {
-            background: rgb(0,160,220);
+            background: rgb(0, 160, 220);
           }
 
-          .iconshopping_cart {
+          .icon-cart {
             line-height: 44px;
             font-size: 24px;
-            color: #8085 8;
+            color: #808508;
 
             &.highlight {
               color: #fff;
@@ -165,6 +182,15 @@ export default {
         font-size: 12px;
         font-weight: 700;
         background: #2b333b;
+
+        &.not-enough {
+          background: #2b333b;
+        }
+
+        &.enough {
+          background: #00bc3c;
+          color: #fff;
+        }
       }
     }
   }
