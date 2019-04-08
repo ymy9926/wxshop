@@ -15,6 +15,7 @@
 
 <script type="text/ecmascript-6">
 import Vue from "vue";
+//var eventHub = new Vue();
 export default {
   data() {
     return {};
@@ -32,6 +33,7 @@ export default {
       } else {
         this.food.count++;
       }
+      this.$emit("cart-add", event.target);
     },
     decreaseCart(event) {
       if (this.food.count) {
@@ -55,20 +57,25 @@ export default {
     font-size: 24px;
     color: rgb(0, 160, 220);
 
-    &.move-enter-active, .move-leave-active {
+    &.move-transition {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-
-      .inner {
-        display: inline-block;
-        line-height: 24px;
-        transition: all 0.4s linear;
-      }
     }
 
-    &.move-enter, &.move-leave-to {
+    .inner {
+      display: inline-block;
+      line-height: 24px;
+      transition: all 0.4s linear;
+      transform: rotate(0);
+    }
+
+    &.move-enter, &.move-leave-active {
       opacity: 0;
-      transition: translate3d(24px, 0, 0);
+      transform: translate3d(24px, 0, 0);
+
+      .inner {
+        transform: rotate(180deg);
+      }
     }
   }
 

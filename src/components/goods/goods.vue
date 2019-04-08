@@ -37,7 +37,7 @@
                   <span v-show="food.oldPrice" class="old">{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontroll-warpper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol @cart-add="_drop" :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -45,7 +45,12 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart
+      ref="shopcart"
+      :select-foods="selectFoods"
+      :delivery-price="seller.deliveryPrice"
+      :min-price="seller.minPrice"
+    ></shopcart>
   </div>
 </template>
 
@@ -82,6 +87,17 @@ export default {
         }
       }
       return 0;
+    },
+    selectFoods() {
+      var foods = [];
+      this.goods.forEach(good => {
+        good.foods.forEach(food => {
+          if (food.count) {
+            foods.push(food);
+          }
+        });
+      });
+      return foods;
     }
   },
   created() {
@@ -130,7 +146,12 @@ export default {
         height += list[i].clientHeight;
         this.listHeight.push(height);
       }
-      console.log(this.listHeight);
+    },
+    _drop(target) {
+      //体验优化，异步下落
+      this.$nextTick(() => {
+        this.$refs.shopcart.drop(target);
+      });
     }
   }
 };
@@ -242,6 +263,7 @@ export default {
       .content {
         flex: 1;
         position: relative;
+
         .name {
           margin: 2px 0 8px 0;
           height: 14px;
@@ -283,10 +305,11 @@ export default {
             color: rgb(147, 153, 159);
           }
         }
-        .cartcontroll-warpper{
-          position :absolute;
-          right :0px;
-          bottom 0px;
+
+        .cartcontroll-warpper {
+          position: absolute;
+          right: 0px;
+          bottom: 0px;
         }
       }
     }
