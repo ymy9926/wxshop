@@ -175,10 +175,10 @@ export default {
 
     .menu-item {
       display: table;
-      width: 56px;
+      width: 60px;
       height: 46px;
       line-height: 14px;
-      padding: 0 12px;
+      padding: 0 10px;
       border-1px(rgba(7, 17, 27, 0.1));
 
       &.current {
@@ -225,7 +225,7 @@ export default {
 
       .text {
         display: table-cell;
-        width: 56px;
+        width: 60px;
         font-size: 12px;
         vertical-align: middle;
       }
