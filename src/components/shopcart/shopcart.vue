@@ -113,6 +113,12 @@ export default {
       this.selectFoods.forEach(food => {
         total += food.count;
       });
+      if (total == 0) {
+        this.foldlist = true;
+        if (this.$refs.myfoldlist) {
+          this.$refs.myfoldlist.style.transform = "translate3d(0,0,0)";
+        }
+      }
       return total;
     },
     payDesc() {
@@ -442,7 +448,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 40px;
+  z-index: 40;
   transition: all 0.5s;
   background: rgba(7, 17, 27, 0.6);
 
