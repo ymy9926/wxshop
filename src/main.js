@@ -26,6 +26,9 @@ Vue.config.productionTip = false;
 let router = new VueRouter({
   linkActiveClass: 'active',
   routes: [{
+    path: '/',
+    component: goods
+  },{
     path: '/goods',
     component: goods
   }, {
@@ -37,10 +40,13 @@ let router = new VueRouter({
   }]
 });
 
+
+
 /* eslint-disable no-new */
-new Vue({
+var app = new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
 });
+

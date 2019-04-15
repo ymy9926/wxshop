@@ -143,14 +143,12 @@ export default {
     },
     ratingSelect(type) {
       this.selectType = type;
-      console.log(type);
       this.$nextTick(() => {
         this.scroll.refresh();
       });
     },
     toggleContent(isToggle) {
       this.onlyContent = isToggle;
-      console.log(isToggle);
       this.$nextTick(() => {
         this.scroll.refresh();
       });
